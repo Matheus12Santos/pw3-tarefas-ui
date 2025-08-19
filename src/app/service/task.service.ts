@@ -7,7 +7,7 @@ import { Task } from '../model/task';
   providedIn: 'root'
 })
 export class TaskService {
-  private apiUrl = 'http://localhost:4200/tarefas';
+  private apiUrl = 'http://localhost:8080/tarefas';
   private http = inject(HttpClient);
 
   findAll(): Observable<Task[]>{
