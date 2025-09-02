@@ -18,18 +18,23 @@ export class TaskListComponent implements OnInit {
   private taskService = inject(TaskService);
 
   ngOnInit(): void {
-    this.taskService.findAll().subscribe((tasks) =>{
-      this.tasks = tasks;
-    })
+    this.loadTasks();
   }
 
   newTask() {
     this.router.navigate(['/tasks/new']);
   }
 
+  loadTasks(): void{
+    this.taskService.findAll().subscribe((tasks) =>{
+        this.tasks = tasks;
+    })
+  }
+
   deleteTask(id: number | undefined) {
     if (id && confirm('Tem certeza que deseja excluir esta tarefa?')) {
-      console.log("Exclusão realizada");
+      this.taskService.deleteTask(id).subscribe(()=> this.loadTasks());
+      //console.log("Exclusão realizada");
     }
   }
 
